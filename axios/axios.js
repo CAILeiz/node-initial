@@ -6,8 +6,7 @@ axios({
     url: httpUrl
   })
     .then( res => {
-        // console.log(res);
-        let reg = /<div id="sort_box_0" class="sort-box sort-unfold">(.*?)\t<a href="\/film\/list\/style-%E6%81%90%E6%80%96\.html"/gis;
-        console.log(reg.exec(res)); 
-        // res.
+        console.log(res);
+        // let reg = /<div id="sort_box_0" class="sort-box sort-unfold">(.*?)\t<a href="\/film\/list\/style-%E6%81%90%E6%80%96\.html"/gis;
+        // console.log(reg.exec(res)); 
 });
