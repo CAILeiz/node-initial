@@ -4,24 +4,31 @@ const cheerio = require("cheerio"),
   path = require("path");
 let parentLink = [],
   indexHTMLUrl = "https://www.doutula.com/article/list/?page=",
-  allPageNum = (async function () {
-    let pageInfo = await axios.get(`${indexHTMLUrl}1`);
-    let $ = cheerio.load(pageInfo.data),
-      btnPagiinationLength = $(".pagination li").length;
-
-    return $(".pagination li")
-      .eq(btnPagiinationLength - 1)
-      .text();
+  allPageNum = 0;
+getAllPageNUm();
+async function getAllPageNUm() {
+  let pageInfo = await axios.get(`${indexHTMLUrl}1`);
+  let $ = cheerio.load(pageInfo.data),
+    btnPagiinationLength = $(".pagination li").length;
+  console.log(btnPagiinationLength);
+  console.log(
+    $(".pagination li")
+      .eq(btnPagiinationLength - 2)
+      .text()
+  );
+  allPageNum = $(".pagination li")
+    .eq(btnPagiinationLength - 2)
+    .text();
+  // 初始化
+  (function () {
+    for (let i = 1; i <= allPageNum; i++) {
+      console.log(123);
+      getPageInfo(`${indexHTMLUrl}${i}`);
+    }
   })();
-console.log(allPageNum);
-// 初始化
-(function () {
-  for (let i = 1; i <= allPageNum; i++) {
-    getPageInfo(`${indexHTMLUrl}${i}`);
-  }
-})();
+}
 // cheerio用来解析html或者xml文档
-async function getPageInfo(url) {
+function getPageInfo(url) {
   axios.get(url).then((res) => {
     // 将获取到的数据放到cheerio中进行解析
     let $ = cheerio.load(res.data),
@@ -37,7 +44,7 @@ async function getPageInfo(url) {
     getImgInfo(parentLink);
   });
 }
-async function getImgInfo(parentLink) {
+function getImgInfo(parentLink) {
   // console.log(parentLink);
   parentLink.forEach((element) => {
     let res = axios.get(element.url);
