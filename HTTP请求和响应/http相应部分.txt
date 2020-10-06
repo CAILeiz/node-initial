@@ -1,0 +1,11 @@
+HTTP相应也是由四部分组成，分别是状态行、消息报头、空行和响应正文
+状态行 ---> HTTP/1.1 200 OK
+消息报头 ---> Connection: keep-alive
+Content-Security-Policy-Report-Only: default-src https: 'unsafe-inline' 'unsafe-eval' data: blob: ; report-uri https://reports.baidu.com/csp-report/baike
+Content-Type: application/json
+Date: Mon, 05 Oct 2020 12:17:31 GMT
+Server: Apache
+Content-Length: 28
+空行
+响应正文
+{"errno":0,"isLogin":false}

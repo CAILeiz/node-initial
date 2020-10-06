@@ -1,7 +1,9 @@
+const { rejects } = require("assert");
 const cheerio = require("cheerio"),
   axios = require("axios"),
   fs = require("fs"),
   path = require("path");
+const { resolve } = require("path");
 let parentLink = [],
   indexHTMLUrl = "https://www.doutula.com/article/list/?page=",
   allPageNum = 0;
@@ -20,12 +22,12 @@ async function getAllPageNUm() {
     .eq(btnPagiinationLength - 2)
     .text();
   // 初始化
-  (function () {
-    for (let i = 1; i <= allPageNum; i++) {
-      console.log(123);
-      getPageInfo(`${indexHTMLUrl}${i}`);
-    }
-  })();
+  for (let i = 1; i <= allPageNum; i++) {
+    console.log(123);
+    console.log(dlWait);
+    await dlWait(3000 * i);
+    getPageInfo(`${indexHTMLUrl}${i}`);
+  }
 }
 // cheerio用来解析html或者xml文档
 function getPageInfo(url) {
@@ -40,23 +42,25 @@ function getPageInfo(url) {
       // 全部分类
       parentLink.push({ url: parentUrl, title: parentTitle });
     });
-    // console.log(parentLink);
+    console.log(parentLink);
     getImgInfo(parentLink);
   });
 }
+// 获取链接页面详细信息
 function getImgInfo(parentLink) {
   // console.log(parentLink);
   parentLink.forEach((element) => {
     let res = axios.get(element.url);
     console.log(res);
     $ = cheerio.load(res);
-    $(".pic-content img").each((i, item) => {
+    $(".pic-content img").each(async (i, item) => {
       console.log($(item).attr("src"));
       let imgUrl = $(item).attr("src");
       let extname = path.extname(imgUrl);
       let ws = fs.createWriteStream(
         `./img/${item.title}/${item.title}-${i}${extname}`
       );
+      await dlWait(50 * i);
       // 获取到详细信息之后写入图片
       sxios.get(
         imgUrl,
@@ -68,5 +72,14 @@ function getImgInfo(parentLink) {
         })
       );
     });
+  });
+}
+// 将延迟函数封装成promise对象
+function dlWait(timeout) {
+  return new Promise((resolve, rejects) => {
+    setTimeout(() => {
+      resolve(`成功执行延迟函数${timeout}`);
+      console.log(111);
+    }, timeout);
   });
 }
