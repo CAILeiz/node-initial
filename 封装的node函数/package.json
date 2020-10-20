@@ -1,0 +1,14 @@
+{
+  "name": "dlfs",
+  "version": "0.0.1",
+  "description": "原生封装fsPromise",
+  "main": "dlfs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "dalei",
+  "license": "ISC"
+}
