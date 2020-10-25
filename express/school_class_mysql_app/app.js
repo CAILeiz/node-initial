@@ -1,19 +1,36 @@
+// 连接数据库 写接口返回数据
 const express = require("express");
+const ejs = require("ejs");
 let app = express();
 let sqlQuery = require("./dlMysql");
 
+// 将模板引擎与express关联起来
+app.set("views", "views"); // 设置视图的对应目录views
+app.set("view engine", "ejs"); // 设置默认的模板引擎
+app.engine("ejs", ejs.__express); // 定义模板引擎
+
+//  首页内容是boss表中的前两天数据
 app.get("/", async (req, res) => {
   let strSql = "select * from boss limit 0,2";
   let queryResult = await sqlQuery(strSql);
   console.log(Array.from(queryResult));
-  res.end("这是首页");
+  // res.json(Array.from(queryResult));
+  res.render("index", { title: "dl首页" });
 });
-app.get("/boss", (req, res) => {
-  console.log(req);
+// 获取到boss数据
+app.get("/boss", async (req, res) => {
+  // console.log(req);
   let strSql = "select bossname, age, sex from boss limit 0,2";
   let queryResult = await sqlQuery(strSql);
   console.log(Array.from(queryResult));
-  res.end("这是老板页面");
-})
+  // Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
+  res.json(Array.from(queryResult));
+});
+app.get("/boss/:bossid", async (req, res) => {
+  let strSql = "select * from boss where id = ?";
+  let bossid = req.params.bossid;
+  let result = await sqlQuery(strSql, [bossid]);
+  res.json(Array.from(result));
+});
 app.listen(8080);
 module.exports = app;
