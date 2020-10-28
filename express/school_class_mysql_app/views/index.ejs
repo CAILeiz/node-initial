@@ -2,10 +2,17 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <h1>横杠的插入方式</h1>
+    <!-- 横杠是不经过转义直接输出 html-->
+    <div><%-articleTitle%></div>
+    <!-- 等号经过转义输出 text-->
+    <!-- &lt; &gt; -->
+    <h1>等号的插入方式</h1>
+    <div><%=articleTitle%></div>
   </body>
 </html>

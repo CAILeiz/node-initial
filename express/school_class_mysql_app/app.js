@@ -1,36 +1,31 @@
-// 连接数据库 写接口返回数据
 const express = require("express");
 const ejs = require("ejs");
 let app = express();
-let sqlQuery = require("./dlMysql");
-
 // 将模板引擎与express关联起来
 app.set("views", "views"); // 设置视图的对应目录views
 app.set("view engine", "ejs"); // 设置默认的模板引擎
 app.engine("ejs", ejs.__express); // 定义模板引擎
-
-//  首页内容是boss表中的前两天数据
+// 下面介绍的是ejs模板的三种常见使用规则
 app.get("/", async (req, res) => {
-  let strSql = "select * from boss limit 0,2";
-  let queryResult = await sqlQuery(strSql);
-  console.log(Array.from(queryResult));
-  // res.json(Array.from(queryResult));
-  res.render("index", { title: "dl首页" });
+  // 插入变量方式
+  let options = {
+    title: "这是首页",
+    articleTitle: "<h1>相信自己创造未来</h1>",
+  };
+  res.render("index", options);
 });
-// 获取到boss数据
-app.get("/boss", async (req, res) => {
-  // console.log(req);
-  let strSql = "select bossname, age, sex from boss limit 0,2";
-  let queryResult = await sqlQuery(strSql);
-  console.log(Array.from(queryResult));
-  // Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
-  res.json(Array.from(queryResult));
+app.get("/tj", async (req, res) => {
+  // 条件方式
+  let options = {
+    username: "小明",
+    gender: "男",
+  };
+  res.render("condition", options);
 });
-app.get("/boss/:bossid", async (req, res) => {
-  let strSql = "select * from boss where id = ?";
-  let bossid = req.params.bossid;
-  let result = await sqlQuery(strSql, [bossid]);
-  res.json(Array.from(result));
+app.get("/xh", async (req, res) => {
+  // 循环操作
+  let stars = ["蔡徐坤", "郭敬明", "吴亦凡", "鹿晗"];
+  res.render("stars", { stars });
 });
 app.listen(8080);
 module.exports = app;

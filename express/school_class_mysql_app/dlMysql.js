@@ -3,7 +3,7 @@ let options = {
   host: "localhost",
   user: "root",
   password: "123456",
-  database: "company",
+  database: "mall",
 };
 let connection = mysql.createConnection(options);
 connection.connect((err) => {
