@@ -1,0 +1,7 @@
+只要是ejs模板引入css的时候第一步需要在public的css文件夹中将css文件写进来
+在app.js文件中写入
+//设置静态目录
+app.use(express.static(path.join(__dirname, 'public ')));
+在ejs文件中引入css的時候
+直接使用绝对路径即可
+/xx/xx.css

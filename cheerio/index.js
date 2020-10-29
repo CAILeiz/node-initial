@@ -10,7 +10,7 @@ let parentLink = [],
 getAllPageNUm();
 async function getAllPageNUm() {
   let pageInfo = await axios.get(`${indexHTMLUrl}1`);
-  let $ = cheerio.load(pageInfo.data),
+  let $ = cheerio.load(pageInfo.data ),
     btnPagiinationLength = $(".pagination li").length;
   console.log(btnPagiinationLength);
   console.log(

@@ -24,8 +24,9 @@ app.get("/tj", async (req, res) => {
 });
 app.get("/xh", async (req, res) => {
   // 循环操作
-  let stars = ["蔡徐坤", "郭敬明", "吴亦凡", "鹿晗"];
-  res.render("stars", { stars });
+  let options = {
+    stars: ["蔡徐坤", "郭敬明", "吴亦凡", "鹿晗"],
+  };
+  res.render("xh", options);
 });
-app.listen(8080);
 module.exports = app;
