@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+let count = 1;
 let intervalTime = 5 * 60 * 1000;
 async function start() {
   let options = {
@@ -180,9 +181,105 @@ async function start() {
   await page.goto("https://blog.csdn.net/qq_40860137/article/details/83990730");
   await page.goto("https://blog.csdn.net/qq_40860137/article/details/83990572");
   await page.goto("https://blog.csdn.net/qq_40860137/article/details/83959151");
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/107911581"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/107447942"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106985262"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106640225"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106477903"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106404802"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106384667"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106382927"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106377508"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106355687"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106288461"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/106037145"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105824826"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105824708"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105824522"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105817719"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105701717"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105680697"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105675930"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105560659"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105560459"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105494329"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105451539"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105379786"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105244779"
+  );
+  await page.goto(
+    "https://blog.csdn.net/qq_40860137/article/details/105146554"
+  );
+  await page.goto("https://blog.csdn.net/qq_40860137/article/details/83958992");
+  await page.goto("https://blog.csdn.net/qq_40860137/article/details/83991265");
   page.close();
 }
 setInterval((_) => {
+  let time = (function () {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month =
+      date.getMonth() + 1 < 10
+        ? `0${date.getMonth() + 1}`
+        : date.getMonth() + 1;
+    let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    let hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    let minutes =
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+    let seconds =
+      date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  })();
   console.log("我执行了");
+  console.log(time);
   start();
 }, intervalTime);
