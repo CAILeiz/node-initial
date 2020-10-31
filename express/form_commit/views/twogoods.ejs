@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%-goods[0].goodName%></title>
+    <link rel="stylesheet" href="/css/goods.css" />
+  </head>
+  <body>
+    <div>
+      <%for(let i = 0; i < goods.length; i++) {%>
+      <h1><%-goods[i].goodId%> : <%-goods[i].goodName%></h1>
+      <h2>价格: <%-goods[i].price%></h2>
+      <%}%>
+    </div>
+  </body>
+</html>
