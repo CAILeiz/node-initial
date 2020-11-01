@@ -6,20 +6,26 @@
     <title>Document</title>
   </head>
   <body>
-    <!--  action 是端口后面的路径  -->
+    <!--  action 是端口后面的路径  get请求-->
     <!-- http://localhost:3000/search?searchKey=%E6%94%B6%E5%88%B0as -->
-    <form action="/search" method="get">
+    <!-- <form action="/search" method="get">
       <input type="text" name="searchKey" />
-      <input type="text" name="searchKey" />
+      <input type="text" name="content" />
       <input type="submit" value="搜索" />
-    </form>
-
-    <script src="https://www.jquery.js/12.js">
+    </form> -->
+    <!-- <script src="https://www.jquery.js/12.js">
       // 上面的表单还可以使用ajax来请求 这里使用query
       let getUrl = "/search?searchKey=故宫"
       $.ajax("get", getUrl).then( res => {
         console.log(res);
       })
-    </script>
+    </script> -->
+
+    <!-- 表单post发送请求 -->
+    <form action="/search" method="post">
+      <input type="text" name="username" />
+      <input type="password" name="password" />
+      <input type="submit" value="搜索" />
+    </form>
   </body>
 </html>
