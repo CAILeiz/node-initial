@@ -3,6 +3,9 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var md5 = require("./MD5");
+var str = "11111";
+console.log(md5.md5(str + md5.MD5_SUFFIX));
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -20,7 +23,8 @@ app.use(express.json());
 // res.body
 app.use(express.urlencoded({ extended: false }));
 // 设置cookie
-app.use(cookieParser());
+// 给cookie 加密
+app.use(cookieParser("secret"));
 // 设置静态资源 如果有访问静态资源直接输出
 app.use(express.static(path.join(__dirname, "public")));
 
