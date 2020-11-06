@@ -13,7 +13,9 @@ var usersRouter = require("./routes/users");
 var app = express();
 
 // view engine setup
+// 设置ejs渲染模板
 app.set("views", path.join(__dirname, "views"));
+// 设置解析ejs模板的引擎
 app.set("view engine", "ejs");
 
 // express中间件
@@ -28,6 +30,7 @@ app.use(cookieParser("secret"));
 // 设置静态资源 如果有访问静态资源直接输出
 app.use(express.static(path.join(__dirname, "public")));
 
+// 设置路由模块
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 

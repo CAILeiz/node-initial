@@ -1,4 +1,5 @@
 var express = require("express");
+const app = require("../app");
 // express.Router() 实例化路由模块 该路由模块相当于一个小型的app
 // 假设现在我们新建一个商城app
 let api = express.Router();
@@ -9,7 +10,7 @@ api.use((req, res, next) => {
   res.append("Access-Control-Allow-Origin", "*");
   // 允许所有请求类型
   res.append("Access-Control-Allow-Origin-Content-type", "*");
-  console.log("你是我的人");
+  console.log("我是next之前的console");
   next();
 });
 // cid为分类id pid为页面id
