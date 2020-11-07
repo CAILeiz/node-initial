@@ -1,5 +1,7 @@
 var express = require("express");
 var router = express.Router();
+var Md5 = require("../MD5");
+const { route } = require("./users");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -32,5 +34,28 @@ router.get("/adminSecret", (req, res) => {
     res.send("登录失败");
   }
 });
+// 加密数据
+router.get("/appSecret", (req, res) => {
+  let secretStr = Md5.md5("true");
+  setSecretCookie("true", secretStr);
+  res.cookie("register", secretStr);
+  res.send(`register key 加密成功 加密后的值为 ${secretStr}`);
+});
+// 解密数据
+router.get("/getAppSecret", (req, res) => {
+  let _cookie = req.cookies.register;
+  console.log(secretCookie);
+  console.log(req.cookies.register);
+  let jiemiStr = getSecretCookie(_cookie);
+  res.send("解密前" + req.cookies.register + "解密后: " + jiemiStr);
+});
+
+let secretCookie = {};
+function setSecretCookie(str, secretStr) {
+  secretCookie[secretStr] = str;
+}
+function getSecretCookie(secretStr) {
+  return secretCookie[secretStr];
+}
 
 module.exports = router;
