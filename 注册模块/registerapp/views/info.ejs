@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title></title>
+</head>
+<body>
+  <!-- 该页面是用来展示未登录之后的页面 -->
+  <h1><%=title%></h1>
+  <h3><%=content%></h3>
+  <p>
+    <span>
+      <span class="num">5</span>
+      秒后跳转至:
+      <a href="<%=href%>">
+        <%=hrefText%>
+      </a>
+    </span>
+    <script>
+      let n = 5
+      let interval = setInterval(() => {
+        n--;
+        if(n == 0 ){
+          clearInterval(interval);
+          location.href = "<%=href%>"
+        } else {
+          document.getElementsByClassName("num")[0].innerText = n;
+        }
+      }, 1000);
+    </script>
+  </p>
+</body>
+</html>
