@@ -7,6 +7,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var uploadRouter = require("./routes/upload");
 var ajaxRouter = require("./routes/ajax");
+var downloadRouter = require("./routes/download");
 
 var app = express();
 // view engine setup
@@ -23,6 +24,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/imgUpload", uploadRouter);
 app.use("/imgUploadAjax", ajaxRouter);
+app.use("/download", downloadRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
