@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>单文件上传</h1>
+    <!-- 上传文件需要设置enctype 类型为 multipart/form-data  -->
+    <form action="/imgUpload" method="post" id="">
+      <label for="singleImg">选择文件</label>
+      <input type="file" name="imgfile" id="singleImg" hidden />
+      <div id="btn">上传</div>
+    </form>
+    <h1>预览图片</h1>
+    <img src="" alt="" id="yulan" style="width: 300px; height: 200px" />
+    <!-- <h1>多文件上传</h1>
+    <form action="/imgUpload/more" method="post" enctype="multipart/form-data">
+      <input type="file" name="imgfile" multiple id="arrayImg" />
+      <button type="submit">上传</button>
+    </form> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+      // 浏览器自带转换为表格数据
+      let formDataObj;
+      let file;
+      $("#singleImg").change(function () {
+        console.log(this.files);
+        file = this.files[0];
+        // 因为'/'是上传单文件 所以需要每次都new一次 FormData
+        formDataObj = new FormData();
+        formDataObj.append("imgfile", file);
+        // 预览图片
+        let yulanUrl = window.webkitURL.createObjectURL(file);
+        $("#yulan").attr("src", yulanUrl);
+      });
+      $("#btn").click(function () {
+        $.ajax({
+          url: "/imgUploadAjax",
+          method: "POST",
+          data: formDataObj,
+          contentType: false, // 不需要浏览器进行格式数据
+          processData: false, // 不用浏览器处理数据
+        }).then((res) => {
+          console.log("返回的图片", res);
+          let img = res.data.dest + res.data.filename;
+          $("body").append(`<h1>上传成功,回显图片</h1> <img src="${img}">`);
+        });
+      });
+    </script>
+  </body>
+</html>
