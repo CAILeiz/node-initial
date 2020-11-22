@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/layui.css" />
+    <script src="layui.all.js"></script>
+  </head>
+  <body>
+    <div class="layui-container">
+      常规布局（以中型屏幕桌面为例）：
+      <div class="layui-row">
+        <div class="layui-col-md9">你的内容 9/12</div>
+        <div class="layui-col-md3">你的内容 3/12</div>
+      </div>
+
+      移动设备、平板、桌面端的不同表现：
+      <div class="layui-row">
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+          移动：6/12 | 平板：6/12 | 桌面：4/12
+        </div>
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+          移动：6/12 | 平板：6/12 | 桌面：4/12
+        </div>
+        <div class="layui-col-xs4 layui-col-sm12 layui-col-md4">
+          移动：4/12 | 平板：12/12 | 桌面：4/12
+        </div>
+        <div class="layui-col-xs4 layui-col-sm7 layui-col-md8">
+          移动：4/12 | 平板：7/12 | 桌面：8/12
+        </div>
+        <div class="layui-col-xs4 layui-col-sm5 layui-col-md4">
+          移动：4/12 | 平板：5/12 | 桌面：4/12
+        </div>
+      </div>
+    </div>
+    <script>
+      var device = layui.device();
+      console.log(device);
+      // 判断当前浏览器是PC端还是移动端
+      // true：移动端   false：PC端
+      export const isMobile = (() => {
+        let sUserAgent = navigator.userAgent.toLowerCase();
+        let bIsMobile = /AppleWebKit.*Mobile/i.test(navigator.userAgent);
+        let bIsIpad = sUserAgent.match(/ipad/i) !== null;
+        let bIsIphoneOs = sUserAgent.match(/iphone os/i) !== null;
+        let bIsMidp = sUserAgent.match(/midp/i) !== null;
+        let bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) !== null;
+        let bIsUc = sUserAgent.match(/ucbrowser/i) !== null;
+        let bIsAndroid = sUserAgent.match(/android/i) !== null;
+        let bIsCE = sUserAgent.match(/windows ce/i) !== null;
+        let bIsWM = sUserAgent.match(/windows mobile/i) !== null;
+        if (
+          bIsMobile ||
+          bIsIpad ||
+          bIsIphoneOs ||
+          bIsMidp ||
+          bIsUc7 ||
+          bIsUc ||
+          bIsAndroid ||
+          bIsCE ||
+          bIsWM
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      })();
+    </script>
+  </body>
+</html>
