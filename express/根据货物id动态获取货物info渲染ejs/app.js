@@ -21,7 +21,9 @@ app.use(express.urlencoded());
 app.get("/", (req, res) => {
   console.log(122);
   console.log(req.params);
-  let options = {};
+  let options = {
+    title: "奋斗",
+  };
   res.render("index", options);
 });
 // form get 请求

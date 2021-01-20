@@ -6,9 +6,9 @@ class dlApp {
   constructor() {
     // 定义用来注册的接口对象
     this.reqEvent = {};
-    //
     this.server = http.createServer();
     this.server.on("request", (req, res) => {
+      console.log("req.url", req.url);
       let pathObj = path.parse(req.url);
       console.log(pathObj);
       // 判断接口地址中有没有这个url地址
@@ -16,6 +16,7 @@ class dlApp {
         res.setHeader("Content-type", "text/html;charset=UTF-8");
         this.reqEvent[pathObj.dir](req, res);
       } else if (pathObj.dir == "/static") {
+        console.log("pathObj", pathObj);
         res.setHeader("Content-type", this.getContentType(pathObj.ext));
         let rs = fs.createReadStream("./static/" + pathObj.base);
         rs.pipe(res);
