@@ -3,7 +3,7 @@ const router = express.Router();
 
 // 引入一个判断是否登录的中间件
 function isLoginMid(req, res, next) {
-  console.log(req.session);
+  console.log("req.session", req.session);
   if (req.session.username) {
     // 已登录进入下一个环节 --> 目前下一个环节是数据页面
     next();

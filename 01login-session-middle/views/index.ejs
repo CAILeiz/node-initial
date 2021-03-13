@@ -2,10 +2,17 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <button>去登录页</button>
+    <script>
+      const btn = document.getElementsByTagName("button")[0];
+      btn.onclick = function () {
+        window.location.href = "/login";
+      };
+    </script>
   </body>
 </html>

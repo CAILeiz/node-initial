@@ -12,7 +12,9 @@ var loginRouter = require("./routes/login");
 var app = express();
 
 // view engine setup
+// 设置静态模板
 app.set("views", path.join(__dirname, "views"));
+// 设置ejs模板渲染引擎
 app.set("view engine", "ejs");
 
 // 中间件
@@ -30,7 +32,9 @@ app.use(
   })
 );
 app.use(logger("dev"));
+// 请求参数json转换
 app.use(express.json());
+// express.urlencoded本质上是让req多了一个body 让你可以访问req.body
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
@@ -55,5 +59,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
+console.log("localhost:3000");
 module.exports = app;
