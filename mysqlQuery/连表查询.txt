@@ -1,4 +1,0 @@
-连表查询实质是将两个表融合起来进行筛选
-select * from a inner join b;
-// 表a中所有的数据都会跟b中的每个数据进行关联 这种查询对于我们来说是不想要的
-select * from a as c left join b as d  on c.id = d.authorid where c.name = "1";
